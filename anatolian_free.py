@@ -38,6 +38,8 @@ if len(argv) == 1:
     sys.exit(f"\n\tKullanım : \n\t{sys.argv[0]} https://youtu.be/link \n") # Link formatı youtu.be şeklinde olmalı . AKsi türlü upload ederken dosyayı bulamayacak , manuel olarak girmeniz istenecektir
 
 else:
+    if argv[1].startswith("https://youtube.com") or argv[1].startswith("https://www.youtube.com"):
+        argv[1] = "https://youtu.be/"+argv[1][argv[1].rfind("/")+9:]
     kaynak = bs(req.urlopen(argv[1]).read(),"html.parser")
     title = kaynak.find("title").text.replace("- YouTube","").strip()+"-"+argv[1].split("/")[::-1][0]+".mp3"
     
